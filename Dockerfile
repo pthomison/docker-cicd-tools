@@ -8,10 +8,11 @@ kubernetes-client \
 jq \
 git \
 python3 \
+python3-pip \
 ncurses \
 iproute \
 wget \
-unzip
+unzip 
 
 # install helm
 ENV HELM_VERSION=v3.4.1
