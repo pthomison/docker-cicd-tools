@@ -12,7 +12,8 @@ python3-pip \
 ncurses \
 iproute \
 wget \
-unzip 
+unzip \
+make
 
 # install helm
 ENV HELM_VERSION=v3.4.1
