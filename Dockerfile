@@ -15,7 +15,8 @@ wget \
 unzip \
 make \
 telnet \
-bind-utils
+bind-utils \
+stress
 
 # install helm
 ENV HELM_VERSION=v3.4.1
