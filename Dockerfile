@@ -13,7 +13,9 @@ ncurses \
 iproute \
 wget \
 unzip \
-make
+make \
+telnet \
+bind-utils
 
 # install helm
 ENV HELM_VERSION=v3.4.1
