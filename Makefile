@@ -2,7 +2,7 @@ image_name = pthomison/cicd-tools
 image_tag = latest
 
 build:
-	docker build . -t $(image_name):$(image_tag)
+	docker build . -t $(image_name):$(image_tag) --no-cache
 
 shell: build
 	docker run -it --rm $(image_name):$(image_tag) /bin/bash

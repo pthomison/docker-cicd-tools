@@ -1,4 +1,4 @@
-FROM fedora:33
+FROM fedora:34
 
 RUN dnf update -y
 
@@ -16,7 +16,8 @@ unzip \
 make \
 telnet \
 bind-utils \
-stress
+stress \
+findutils
 
 # install helm
 ENV HELM_VERSION=v3.4.1
