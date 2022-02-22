@@ -34,7 +34,7 @@ wget https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSI
 unzip terraform_${TF_VERSION}_linux_amd64.zip -d /usr/bin && \
 rm -rf /tmp/*
 
-ENV K9S_DIR=/opt/k9s K9S_VERSION=v0.24.2
+ENV K9S_DIR=/opt/k9s K9S_VERSION=v0.25.18
 
 RUN mkdir -p $K9S_DIR && \
 pushd $K9S_DIR && \
