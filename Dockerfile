@@ -20,7 +20,7 @@ stress \
 findutils
 
 # install helm
-ENV HELM_VERSION=v3.4.1
+ENV HELM_VERSION=v3.8.0
 RUN cd /tmp && \
 wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
 tar -xf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
@@ -28,7 +28,7 @@ cp /tmp/linux-amd64/helm /usr/bin/helm && \
 rm -rf /tmp/*
 
 # install terraform
-ENV TF_VERSION=0.13.4
+ENV TF_VERSION=1.1.6
 RUN cd /tmp && \
 wget https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip && \
 unzip terraform_${TF_VERSION}_linux_amd64.zip -d /usr/bin && \
