@@ -1,4 +1,4 @@
-FROM fedora:34
+FROM fedora:36
 
 RUN dnf update -y
 
@@ -20,7 +20,7 @@ stress \
 findutils
 
 # install helm
-ENV HELM_VERSION=v3.8.0
+ENV HELM_VERSION=v3.9.4
 RUN cd /tmp && \
 wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
 tar -xf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
@@ -28,13 +28,13 @@ cp /tmp/linux-amd64/helm /usr/bin/helm && \
 rm -rf /tmp/*
 
 # install terraform
-ENV TF_VERSION=1.1.6
+ENV TF_VERSION=1.2.9
 RUN cd /tmp && \
 wget https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip && \
 unzip terraform_${TF_VERSION}_linux_amd64.zip -d /usr/bin && \
 rm -rf /tmp/*
 
-ENV K9S_DIR=/opt/k9s K9S_VERSION=v0.25.18
+ENV K9S_DIR=/opt/k9s K9S_VERSION=v0.26.3
 
 RUN mkdir -p $K9S_DIR && \
 pushd $K9S_DIR && \
