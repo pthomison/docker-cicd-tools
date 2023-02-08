@@ -4,6 +4,9 @@ image_tag = latest
 build:
 	docker build . -t $(image_name):$(image_tag) --no-cache
 
+build-w-cache:
+	docker build . -t $(image_name):$(image_tag)
+
 shell: build
 	docker run -it --rm $(image_name):$(image_tag) /bin/bash
 

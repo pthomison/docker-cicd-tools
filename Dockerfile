@@ -3,45 +3,45 @@ FROM fedora:36
 RUN dnf update -y
 
 RUN dnf install -y \
-awscli \
-kubernetes-client \
-jq \
-git \
-python3 \
-python3-pip \
-ncurses \
-iproute \
-wget \
-unzip \
-make \
-telnet \
-bind-utils \
-stress \
-findutils
+    awscli \
+    kubernetes-client \
+    jq \
+    git \
+    python3 \
+    python3-pip \
+    ncurses \
+    iproute \
+    wget \
+    unzip \
+    make \
+    telnet \
+    bind-utils \
+    stress \
+    findutils
 
 # install helm
-ENV HELM_VERSION=v3.9.4
+ENV HELM_VERSION=v3.11.1
 RUN cd /tmp && \
-wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
-tar -xf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
-cp /tmp/linux-amd64/helm /usr/bin/helm && \
-rm -rf /tmp/*
+    wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
+    tar -xf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
+    cp /tmp/linux-amd64/helm /usr/bin/helm && \
+    rm -rf /tmp/*
 
 # install terraform
-ENV TF_VERSION=1.2.9
+ENV TF_VERSION=1.3.7
 RUN cd /tmp && \
-wget https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip && \
-unzip terraform_${TF_VERSION}_linux_amd64.zip -d /usr/bin && \
-rm -rf /tmp/*
+    wget https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip && \
+    unzip terraform_${TF_VERSION}_linux_amd64.zip -d /usr/bin && \
+    rm -rf /tmp/*
 
-ENV K9S_DIR=/opt/k9s K9S_VERSION=v0.26.3
+ENV K9S_DIR=/opt/k9s K9S_VERSION=v0.27.2
 
 RUN mkdir -p $K9S_DIR && \
-pushd $K9S_DIR && \
-wget https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_x86_64.tar.gz && \
-tar -xf k9s_Linux_x86_64.tar.gz && \
-ln -s /opt/k9s/k9s /usr/bin/k9s && \
-popd
+    pushd $K9S_DIR && \
+    wget https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_amd64.tar.gz && \
+    tar -xf k9s_Linux_amd64.tar.gz && \
+    ln -s /opt/k9s/k9s /usr/bin/k9s && \
+    popd
 
 # install reckoner
 RUN pip install reckoner
