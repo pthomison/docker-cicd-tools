@@ -21,25 +21,28 @@ RUN dnf install -y \
 
 # install helm
 ENV HELM_VERSION=v3.11.1
-RUN cd /tmp && \
-    wget https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
-    tar -xf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
-    cp /tmp/linux-amd64/helm /usr/bin/helm && \
+RUN ARCH=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && \
+    cd /tmp && \
+    wget https://get.helm.sh/helm-${HELM_VERSION}-linux-${ARCH}.tar.gz && \
+    tar -xf helm-${HELM_VERSION}-linux-${ARCH}.tar.gz && \
+    cp /tmp/linux-${ARCH}/helm /usr/bin/helm && \
     rm -rf /tmp/*
 
 # install terraform
 ENV TF_VERSION=1.3.7
-RUN cd /tmp && \
-    wget https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip && \
-    unzip terraform_${TF_VERSION}_linux_amd64.zip -d /usr/bin && \
+RUN ARCH=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && \
+    cd /tmp && \
+    wget https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_${ARCH}.zip && \
+    unzip terraform_${TF_VERSION}_linux_${ARCH}.zip -d /usr/bin && \
     rm -rf /tmp/*
 
 ENV K9S_DIR=/opt/k9s K9S_VERSION=v0.27.2
 
-RUN mkdir -p $K9S_DIR && \
+RUN ARCH=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && \
+    mkdir -p $K9S_DIR && \
     pushd $K9S_DIR && \
-    wget https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_amd64.tar.gz && \
-    tar -xf k9s_Linux_amd64.tar.gz && \
+    wget https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_${ARCH}.tar.gz && \
+    tar -xf k9s_Linux_${ARCH}.tar.gz && \
     ln -s /opt/k9s/k9s /usr/bin/k9s && \
     popd
 
