@@ -7,7 +7,7 @@ build:
 build-w-cache:
 	docker build . -t $(image_name):$(image_tag)
 
-shell: build
+shell: 
 	docker run -it --rm $(image_name):$(image_tag) /bin/bash
 
 push:

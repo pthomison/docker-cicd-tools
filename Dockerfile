@@ -1,9 +1,8 @@
-FROM fedora:36
+FROM fedora:37
 
 RUN dnf update -y
 
 RUN dnf install -y \
-    awscli \
     kubernetes-client \
     jq \
     git \
@@ -36,14 +35,24 @@ RUN ARCH=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && \
     unzip terraform_${TF_VERSION}_linux_${ARCH}.zip -d /usr/bin && \
     rm -rf /tmp/*
 
+# install k9s
 ENV K9S_DIR=/opt/k9s K9S_VERSION=v0.27.3
-
 RUN ARCH=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && \
     mkdir -p $K9S_DIR && \
     pushd $K9S_DIR && \
     wget https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_${ARCH}.tar.gz && \
     tar -xf k9s_Linux_${ARCH}.tar.gz && \
-    ln -s /opt/k9s/k9s /usr/bin/k9s && \
+    ln -s ${K9S_DIR}/k9s /usr/bin/k9s && \
+    popd
+
+# install awscli 2.x
+ENV AWSCLI_DIR=/opt/awscli AWSCLI_VERSION=2.10.1
+RUN ARCH=$(arch) && \
+    mkdir -p $AWSCLI_DIR && \
+    pushd $AWSCLI_DIR && \
+    wget https://awscli.amazonaws.com/awscli-exe-linux-${ARCH}-${AWSCLI_VERSION}.zip && \
+    unzip awscli-exe-linux-${ARCH}-${AWSCLI_VERSION}.zip && \
+    ln -s ${AWSCLI_DIR}/aws/dist/aws /usr/bin/aws && \
     popd
 
 # install reckoner
