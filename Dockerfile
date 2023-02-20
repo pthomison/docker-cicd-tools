@@ -29,14 +29,14 @@ RUN ARCH=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && \
     rm -rf /tmp/*
 
 # install terraform
-ENV TF_VERSION=1.3.7
+ENV TF_VERSION=1.3.9
 RUN ARCH=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && \
     cd /tmp && \
     wget https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_${ARCH}.zip && \
     unzip terraform_${TF_VERSION}_linux_${ARCH}.zip -d /usr/bin && \
     rm -rf /tmp/*
 
-ENV K9S_DIR=/opt/k9s K9S_VERSION=v0.27.2
+ENV K9S_DIR=/opt/k9s K9S_VERSION=v0.27.3
 
 RUN ARCH=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && \
     mkdir -p $K9S_DIR && \
