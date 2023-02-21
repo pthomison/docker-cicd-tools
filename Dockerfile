@@ -55,5 +55,15 @@ RUN ARCH=$(arch) && \
     ln -s ${AWSCLI_DIR}/aws/dist/aws /usr/bin/aws && \
     popd
 
+# install flux
+ENV FLUX_DIR=/opt/flux FLUX_VERSION=0.40.0
+RUN ARCH=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && \
+    mkdir -p $FLUX_DIR && \
+    pushd $FLUX_DIR && \
+    wget https://github.com/fluxcd/flux2/releases/download/v${FLUX_VERSION}/flux_${FLUX_VERSION}_linux_${ARCH}.tar.gz && \
+    tar -xf flux_${FLUX_VERSION}_linux_${ARCH}.tar.gz && \
+    ln -s ${FLUX_DIR}/flux /usr/bin/flux && \
+    popd
+
 # install reckoner
 RUN pip install reckoner
